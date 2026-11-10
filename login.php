@@ -1,7 +1,7 @@
 <?php
 require_once 'include.php';
 
-$login_valide = $GLOBALS['config']['default-user']['login'];
+$login_valide = $GLOBALS['config']['default-user']['mail'];
 $pwd_valide = $GLOBALS['config']['default-user']['password'];
 
 // on teste si nos variables sont définies
