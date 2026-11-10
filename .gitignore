@@ -1,5 +1,8 @@
 
 config.yml
+/vendor
+/nodes_modules
+
 
 .env
 .env.local
