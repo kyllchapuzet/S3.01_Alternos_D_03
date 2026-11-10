@@ -1,0 +1,7 @@
+{
+    "require": {
+        "twig/twig": "^3.30",
+        "symfony/yaml": "^8.1",
+        "twig/intl-extra": "^3.30"
+    }
+}
