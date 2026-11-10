@@ -1,4 +1,7 @@
 <?php
 require_once 'include.php';
-echo $twig->render('page_creationDeCompte.html.twig');
+
+$erreur = null;
+
+echo $twig->render('page_creationDeCompte.html.twig', ['erreur' => $erreur]);
 ?>
