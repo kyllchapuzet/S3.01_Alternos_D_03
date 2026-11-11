@@ -12,5 +12,5 @@ website :
   language: fr
 
 default-user : 
-  login : changeme
+  mail : changeme
   password : changeme
