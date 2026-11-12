@@ -31,14 +31,26 @@
                     </li>
                 </ul>
 
-                <!-- Bouton candidater, s'il clique alors il est redirigé sur une page avec un message de confirmation et la candidature est enregistrée dand la BD -->
+                <!-- Bouton candidater, s'il clique alors un message de confirmation est affiché et la candidature est enregistrée dand la BD -->
                 <div class="card-body">
-                    <a href="traiterCandidature.php?mailEntreprise={{ entreprise.mail }}">Candidater</a>
+                    <button type="button" id="boutonCandidater" class="btn btn-outline-primary">Candidater</button>
+                </div>
+
+                <!-- Message de confirmation, caché tant qu'on ne clique pas sur le btn graçe à display : none -->
+                <div id="messageConfirmation" class="alert alert-success" role="alert" style="display: none;">
+                    Votre candidature a bien été prise en compte ! 
                 </div>
 
             </div>
         </div>
 
+        <!--  Script pour afficher le massage quand le btn est cliqué  -->
+        <script>
+            document.getElementById('boutonCandidater').addEventListener('click', function () {
+                //Affichage du message en changeant le style
+                document.getElementById('messageConfirmation').style.display = 'block';
+            });
+        </script>
     </div>
 
 </div>
