@@ -1,6 +1,7 @@
 
 config.yml
 /vendor
+/node_modules
 /nodes_modules
 
 
