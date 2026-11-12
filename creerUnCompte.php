@@ -8,6 +8,7 @@ $erreur = null;
     $password = $_POST['pwd'];
     $passwordConfirm = $_POST['pwdConfirm'];
     $_SESSION['login'] = $email;
+    $statut = $_SESSION['statut'];
 
     if ($password !== $passwordConfirm) 
     {
@@ -20,18 +21,30 @@ $erreur = null;
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-        $verifEmail = $pdo->prepare("SELECT * FROM Etudiant WHERE email = ?");
+
+        if ($statut === 'etudiant') {
+            $verifEmail = $pdo->prepare("SELECT * FROM Etudiant WHERE email = ?");
+        }
+        elseif ($statut === 'entreprise') {
+            $verifEmail = $pdo->prepare("SELECT * FROM Entreprise WHERE email = ?");
+        }
         $verifEmail->execute([$email]);
 
         if ($verifEmail->fetch()) {
             $erreur = "Un compte avec cette adresse e-mail existe déjà.";
         } 
         else {
+
         $salt = '$2y$07$usesomesillystringforsalt$';
         $passwordCrypte = crypt($password, $salt);
 
         
-            $sql = $pdo->prepare("INSERT INTO Etudiant(email, password) VALUES (?, ?)");
+            if ($statut === 'etudiant') {
+                $sql = $pdo->prepare("INSERT INTO Etudiant(email, password) VALUES (?, ?)");
+            }
+            elseif ($statut === 'entreprise') {
+                $sql = $pdo->prepare("INSERT INTO Entreprise(email, password) VALUES (?, ?)");
+            }
             $sql->execute([$email, $passwordCrypte]);
 
 
@@ -42,7 +55,8 @@ $erreur = null;
 
 
 echo $twig->render('pageCreationDeCompte.html.twig', [
-    'erreur' => $erreur
+    'erreur' => $erreur,
+    'statut' => $_SESSION['statut'] ?? null
 ]);
 
 ?>
