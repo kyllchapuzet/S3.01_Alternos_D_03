@@ -3,5 +3,45 @@
 {% block title %} Information de l'entreprise {% endblock %}
 
 {% block content %}
+<div>
+
+    <div>
+        <h4>Entreprise : {{ entreprise.nom }}</h4>
+    </div>
+
+    <div class="row">
+        
+        <!-- Information de l'entreprise -->
+        <div class="col-md-7">
+            
+            <div class="card">
+                <!-- Logo Entreprise -->
+                <div class="card-header">
+                    <h5>Fiche d'informations</h5>
+                    <img src="images/{{ entreprise.logo }}" alt="Logo" width="40" height="40">
+                </div>
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Nom de l'entreprise: {{ entreprise.nom }}</li>
+                    <li class="list-group-item">Description de l'offre : {{ entreprise.offre }}</li>
+
+                    <!--Si l'utilisateur souhaite contacter l'entreprise, il clique et est renvoyé sur la page de discussion directement avec l'entreprise -->
+                    <li class="list-group-item">Discuter avec l'entreprise :  
+                        <a href="discussion.php?destinataire={{ entreprise.mail }}">Ouvrir la messagerie</a>
+                    </li>
+                </ul>
+
+                <!-- Bouton candidater, s'il clique alors il est redirigé sur une page avec un message de confirmation et la candidature est enregistrée dand la BD -->
+                <div class="card-body">
+                    <a href="traiterCandidature.php?mailEntreprise={{ entreprise.mail }}">Candidater</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
 
 {% endblock %}
