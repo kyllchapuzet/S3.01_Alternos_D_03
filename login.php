@@ -1,6 +1,8 @@
 <?php
 require_once 'include.php';
 
+session_start();
+
 $login_valide = $GLOBALS['config']['default-user']['mail'];
 $pwd_valide = $GLOBALS['config']['default-user']['password'];
 

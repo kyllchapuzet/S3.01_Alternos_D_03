@@ -5,7 +5,7 @@
 
 <div class="card m-5">
   <div class="card-body">
-    Bienvenue XX, Vous pouvez consulter vos informations personnelles et gérer vos paramètres ici.
+    Bienvenue {{ user.prenom }}, Vous pouvez consulter vos informations personnelles et gérer vos paramètres ici.
   </div>
 </div>
 
@@ -24,13 +24,13 @@
   <div class="tab-pane show active" id="pills-home" role="tabpanel" aria-labelledby="pills-compte-tab" tabindex="0">
     <div class="card m-5">
       <div class="card-body">
-        Mon Compte
+        <strong> Mon Compte </strong>
         <ul>
-          <li class=""><strong>Nom :</strong> Kyllian</li>
-          <li><strong>Prénom :</strong> CHAPUZET</li>
-          <li><strong>Adresse mail :</strong> kchapuzet@iutbayonne.univ-pau.fr</li>
-          <li><strong>Numéro de téléphone :</strong> 06.xx.xx.xx.xx</li>
-          <li><strong>Adresse :</strong> 123 Rue de l'Université</li>
+          <li class=""><strong>Nom :</strong> {{ user.nom }} </li>
+          <li><strong>Prénom :</strong> {{ user.prenom }}</li>
+          <li><strong>Adresse mail :</strong> {{ user.email }} </li>
+          <li><strong>Numéro de téléphone :</strong> {{ user.numTel }} </li>
+          <li><strong>Adresse :</strong> {{ user.adresse }} </li>
           <li><strong>Statut :</strong> <span class="badge theme-accent">Etudiant</span></li>
         </ul>
         <a href="#" class="btn btn-primary">✎ Modifier mes informations</a>
