@@ -10,8 +10,8 @@ $pdo = new PDO('mysql:host=lakartxela.iutbayonne.univ-pau.fr;dbname=mhild001_bd;
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 //Récupéation des informations de l'entreprise à partir de la base de données
-$sql = $pdo->prepare("SELECT * FROM entreprise WHERE mailEntreprise = ?");
-$sql->execute([$mailEntrprise]);
+$sql = $pdo->prepare("SELECT * FROM Entreprise WHERE mail = ?");
+$sql->execute([$mailEntreprise]);
 $entreprise = $sql->fetch(PDO::FETCH_ASSOC);
 
 //Transmission des données au template
