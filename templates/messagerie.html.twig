@@ -1,0 +1,77 @@
+{% extends "base_template.html.twig" %}
+
+{% block content %}
+<div class="container my-4">
+  <div class="row g-3">
+
+    <!-- ASIDE  -->
+    <aside class="col-3">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Discussions</h5>
+        </div>
+        <div class="list-group list-group-flush">
+          <a href="#" class="list-group-item list-group-item-action active">
+            <div class="fw-bold">Tech Solutions</div>
+            <small>Stage / Alternance</small>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action">
+            <div class="fw-bold">Kyllian Chapuzet</div>
+            <small>Projet SAÉ</small>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action">
+            <div class="fw-bold">Propriétaire Anglet</div>
+            <small>Logement</small>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN  -->
+    <main class="col-9">
+      <div class="card shadow-sm h-100">
+        
+        <!-- En-tête -->
+        <div class="card-header bg-white">
+          <h5 class="mb-0">Discussion avec <strong>Tech Solutions</strong></h5>
+        </div>
+
+        <!-- Corps des messages -->
+        <div class="card-body bg-light" style="min-height: 350px;">
+          
+          <!-- Message Reçu -->
+          <div class="mb-3 text-start">
+            <div class="small text-muted mb-1">Tech Solutions • 14:30</div>
+            <div class="p-3 bg-white border rounded d-inline-block text-dark" style="max-width: 80%;">
+              Bonjour ! Votre profil nous intéresse pour le stage.
+            </div>
+          </div>
+
+          <!-- Message Envoyé -->
+          <div class="mb-3 text-end">
+            <div class="small text-muted mb-1">Moi • 14:31</div>
+            <div class="p-3 bg-primary text-white rounded d-inline-block text-start" style="max-width: 80%;">
+              Bonjour, merci pour votre retour ! Quand seriez-vous disponible pour échanger ?
+            </div>
+          </div>
+
+        </div>
+
+       <!-- Formulaire d'envoi -->
+        <div class="card-footer bg-white">
+          <form action="send_message.php" method="POST" enctype="multipart/form-data" class="d-flex gap-2">
+            <input type="file" name="piece_jointe" id="file-upload" class="d-none">
+            <label for="file-upload" class="btn btn-outline-secondary d-flex align-items-center m-0" title="Ajouter une pièce jointe" style="cursor: pointer;">
+              📎
+            </label>
+            <input type="text" name="message" class="form-control" placeholder="Écrivez votre message..." required>
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+          </form>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+</div>
+{% endblock %}
