@@ -1,0 +1,86 @@
+{% extends "base_template.html.twig" %} 
+
+{% block title %} Créer un compte {% endblock %}
+
+{% block content %}
+
+{% if success %}
+    <div class="alert alert-success align-items-center justify-content-center mt-5">
+        Vos informations ont bien été enregistrées.
+    </div>
+{% endif %}
+
+
+ <div class="container min-vh-100 d-flex align-items-center justify-content-center">
+    
+        <div class="card shadow-lg border-0 rounded-4 w-100" style="max-width: 430px;">
+        
+            <div class="border card-body p-4 p-md-5">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold mb-2">Créer un compte</h2>
+            </div>
+                <hr>
+            <div class="contains-inline">
+                <ol class="stepper sm:stepper-horizontal">
+                    <li class="stepper-item active">Choix du type de compte</li>
+                    <li class="stepper-item active">Création du compte</li>
+                    <li class="stepper-item active ">Infos personnelles</li>
+                    <li class="stepper-item {% if success %}active{% endif %}">Terminé</li>
+                </ol>
+            </div>           
+        <hr>
+
+{% if success %}
+    <div class="d-flex justify-content-center">
+        <a class="btn-solid theme-primary" role="button" href="pageConnexion.php">Se connecter</a>
+    </div>
+
+{% else %}
+    <form method="post" action="pageCompletionProfil.php">
+        {% if statut == 'etudiant' %}
+                <div class="mb-3">
+                    <label for="nom" class="form-label fw-semibold">Nom</label>
+                    <input type="text" class="form-control form-control-lg rounded-3" id="login" name="nom" placeholder="Entrez votre nom" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="prenom" class="form-label fw-semibold">Prenom</label>
+                    <input type="text" class="form-control form-control-lg rounded-3" id="pwd" name="prenom" placeholder="Entrez votre prenom" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="adresse" class="form-label fw-semibold">Adresse postale</label>
+                    <input type="text" class="form-control form-control-lg rounded-3" id="adresse" name="adresse" placeholder="Entrez votre addresse" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="telephone" class="form-label fw-semibold">Numéro de téléphone</label>
+                    <input type="text" class="form-control form-control-lg rounded-3" id="telephone" name="telephone" placeholder="Entrez votre numéro de téléphone" required>
+                </div>
+            {% elseif statut == 'entreprise' %}
+                <div class="mb-3">
+                    <label for="nom" class="form-label fw-semibold">Nom</label>
+                    <input type="text" class="form-control form-control-lg rounded-3" id="login" name="nom" placeholder="Entrez le nom de l'entreprise" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="domaine" class="form-label fw-semibold">Nom de domaine</label>
+                    <input type="text" class="form-control form-control-lg rounded-3" id="domaine" name="domaine" placeholder="Entrez votre nom de domaine" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="nbEmployes" class="form-label fw-semibold">Nombre d'employés</label>
+                    <input id="nbEmployes" class="form-control form-control-lg rounded-3" name="nbEmployes" type="number" placeholder="Entrez votre nombre d'employés" required/>
+                </div>
+
+            {% endif %}
+            <button type="submit" class="btn border btn-styled theme-primary btn-lg w-100 rounded-3">Suivant</button>
+            </form>
+{% endif %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
