@@ -1,0 +1,67 @@
+{% extends "base_template.html.twig" %}
+
+{% block content %}
+<div class="container my-4">
+
+  <!-- Présentation -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body text-center">
+      <img src="images/logo_alternos.png" alt="Logo Alternos : le lien pro qu'il te faut !"
+           class="img-fluid d-block mx-auto mb-3" style="max-width: 450px;">
+      <h2 class="card-title">À propos d'Alternos</h2>
+      <p class="card-text">
+        Alternos est une application web de mise en relation entre étudiants et entreprises
+        en recherche d'alternants ou de stagiaires. Elle agit comme un réseau social : étudiants
+        et recruteurs peuvent s'envoyer des offres et des CV, et discuter en direct
+        via une messagerie pour trouver une alternance ou un stage.
+      </p>
+    </div>
+  </div>
+
+  <!-- Fonctionnalités clés -->
+  <h4 class="mb-3">Nos fonctionnalités</h4>
+  <div class="row g-3 mb-4">
+    {% for f in fonctionnalites %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ f.titre }}</h5>
+            <p class="card-text">{{ f.texte }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Équipe -->
+  <h4 class="mb-3">L'équipe</h4>
+  <div class="row g-3 mb-4">
+    {% for membre in equipe %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h5 class="card-title mb-1">{{ membre.nom }}</h5>
+            <span class="badge bg-primary mb-2">{{ membre.role }}</span>
+            <p class="card-text text-muted mb-0">
+              {{ membre.qualites|join(' • ') }}
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Contexte du projet -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">Le projet</h5>
+      <p class="card-text mb-1">
+        Projet réalisé par le groupe D_03_Alternos (TD2 / TP4) à l'IUT de Bayonne Pays Basque,
+        dans le cadre de la ressource R3.10 – Management des systèmes d'information (Agilité).
+      </p>
+      <p class="card-text text-muted mb-0">Enseignant tuteur : M. Carpentier Yann</p>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
