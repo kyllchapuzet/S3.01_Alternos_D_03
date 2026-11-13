@@ -8,7 +8,12 @@ $erreur = null;
 
 $pdo = new PDO("mysql:host={$GLOBALS['config']['bd']['host']};dbname={$GLOBALS['config']['bd']['name']}", $GLOBALS['config']['bd']['user'], $GLOBALS['config']['bd']['password']);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$verifEmail = $pdo->prepare("SELECT password FROM Etudiant WHERE email = ?");
+
+if ($_SESSION['statut'] === 'etudiant') {
+    $verifEmail = $pdo->prepare("SELECT password FROM Etudiant WHERE email = ?");
+} elseif ($_SESSION['statut'] === 'entreprise') {
+    $verifEmail = $pdo->prepare("SELECT password FROM Entreprise WHERE email = ?");
+}
 $verifEmail->execute([$email]);
 $user = $verifEmail->fetch(PDO::FETCH_ASSOC);
 
