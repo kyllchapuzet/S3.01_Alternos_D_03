@@ -24,19 +24,39 @@
   <div class="tab-pane show active" id="pills-home" role="tabpanel" aria-labelledby="pills-compte-tab" tabindex="0">
     <div class="card m-5">
       <div class="card-body">
-        <strong> Mon Compte </strong>
+        <strong> Mon Compte <span class="badge theme-primary">Etudiant</span> </strong>
         <ul>
           <li class=""><strong>Nom :</strong> {{ user.nom }} </li>
           <li><strong>Prénom :</strong> {{ user.prenom }}</li>
           <li><strong>Adresse mail :</strong> {{ user.email }} </li>
           <li><strong>Numéro de téléphone :</strong> {{ user.numTel }} </li>
           <li><strong>Adresse :</strong> {{ user.adresse }} </li>
-          <li><strong>Statut :</strong> <span class="badge theme-accent">Etudiant</span></li>
         </ul>
         <a href="#" class="btn btn-primary">✎ Modifier mes informations</a>
       </div>
     </div>
   </div>
+
+
+  <div class="tab-pane" id="pills-cv" role="tabpanel" aria-labelledby="pills-cv-tab" tabindex="0">
+    <div class="card m-5">
+      <div class="card-body">
+        <h3>Mon CV</h3>
+          <img src="images/cvTest.png" alt="" width="1000"  height="1000">
+      </div>
+    </div>
+  </div>
+
+<div class="tab-pane" id="pills-pref" role="tabpanel" aria-labelledby="pills-pref-tab" tabindex="0">
+    <div class="card m-5">
+      <div class="card-body">
+        <h3>Préférences</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </div>
 
 <br>
