@@ -1,26 +1,36 @@
 <?php
 require_once 'include.php';
 
-$login_valide = $GLOBALS['config']['default-user']['mail'];
-$pwd_valide = $GLOBALS['config']['default-user']['password'];
+$email = $_POST['login'] ?? '';
+$erreur = null;
 
-// on teste si nos variables sont définies
-if (isset($_POST['login']) && isset($_POST['pwd'])) {
-    // on vérifie les informations saisies
-    if ($login_valide == $_POST['login'] && $pwd_valide == $_POST['pwd']) {
-        session_start ();
-        // on enregistre les paramètres de notre visiteur comme variables de session ($login et $pwd) (
-        $_SESSION['login'] = $_POST['login'];
-        $_SESSION['pwd'] = $_POST['pwd'];
-        // on redirige notre visiteur vers une page de notre section membre
-        header ('location: index.php');
-    }
-    else {
-        echo '<body onLoad="alert(\'Membre non reconnu...\')">';
-        // puis on le redirige vers la page d'accueil
-        echo '<meta http-equiv="refresh" content="0;URL=index.php">';
-    }
+
+
+$pdo = new PDO("mysql:host={$GLOBALS['config']['bd']['host']};dbname={$GLOBALS['config']['bd']['name']}", $GLOBALS['config']['bd']['user'], $GLOBALS['config']['bd']['password']);
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$verifEmail = $pdo->prepare("SELECT password FROM Etudiant WHERE email = ?");
+$verifEmail->execute([$email]);
+$user = $verifEmail->fetch(PDO::FETCH_ASSOC);
+
+if (!$user) {
+    $erreur = "Compte inexistant";
 } else {
-    echo 'Les variables du formulaire ne sont pas déclarées.';
+    $mdpCrypte = $user['password'];
+    $mdpSaisie = $_POST['pwd'];
+
+    $salt = '$2y$07$usesomesillystringforsalt$';
+    $passwordCrypte = crypt($mdpSaisie, $salt);
+    if ($mdpCrypte == $passwordCrypte) {
+        $_SESSION['login'] = $email;
+        header('Location: index.php');
+
+    } else {
+        $erreur = "Mot de passe incorrect";
+    }
 }
+
+if ($erreur) {
+    echo $twig->render('pageConnexion.html.twig', ['erreur' => $erreur]);
+}
+
 ?>
