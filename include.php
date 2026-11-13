@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     //Ajout de l'autoload de composer
     require_once 'vendor/autoload.php';
 
@@ -24,6 +26,8 @@
 
     //Ajout de l'initialisation de twig
     require_once 'config/twig.php';
+
+    $twig->addGlobal('session', $_SESSION);
 
 
 ?>
