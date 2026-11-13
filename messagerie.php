@@ -1,7 +1,7 @@
 <?php
 require_once 'include.php';
 
-$user_mail = $_SESSION['login'] ?? null;
+$user_mail = "ton_mail@exemple.fr";
 
 $pdo = new PDO(
     "mysql:host=" . $GLOBALS['config']['bd']['host'] . ";dbname=" . $GLOBALS['config']['bd']['name'] . ";charset=utf8mb4",
@@ -45,6 +45,24 @@ foreach ($conversations as $conv) {
     ");
     $sql->execute([$user_mail, $mail_choisi, $mail_choisi, $user_mail]);
     $messages = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+// Envoi d'un message 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $mail_destinataire = $_POST['mail_destinataire'] ?? null;
+    $message           = trim($_POST['message'] ?? '');
+
+    $sql = $pdo->prepare("
+        INSERT INTO Message (mailExpediteur, mailDestinataire, Contenu)
+        VALUES (?, ?, ?)
+    ");
+    $sql->execute([$user_mail, $mail_destinataire, $message]);
+
+    header('Location: messagerie.php?mail=' . $mail_destinataire );
+    exit;
+}
+
+
 
 
 echo $twig->render('messagerie.html.twig', [
