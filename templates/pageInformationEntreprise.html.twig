@@ -5,19 +5,15 @@
 {% block content %}
 <div>
 
-    <div>
-        <h4>Entreprise : {{ entreprise.nom }}</h4>
-    </div>
-
-    <div class="row">
+    <div class="row g-4">
         
         <!-- Information de l'entreprise -->
-        <div class="col-md-7">
+        <div class="col-7">
             
-            <div class="card">
+            <div class="card h-100">
                 <!-- Logo Entreprise -->
                 <div class="card-header">
-                    <h5>Fiche d'informations</h5>
+                    <h4>Entreprise : {{ entreprise.nom }}</h4>
                     <img src="images/{{ entreprise.logo }}" alt="Logo" width="40" height="40">
                 </div>
 
@@ -32,28 +28,52 @@
                 </ul>
 
                 <!-- Bouton candidater, s'il clique alors un message de confirmation est affiché et la candidature est enregistrée dand la BD -->
-                <div class="card-body">
-                    <button type="button" id="boutonCandidater" class="btn btn-outline-primary">Candidater</button>
+                <div class="card-body d-flex justify-content-center my-3">
+                    <button type="button" id="boutonCandidater" class="btn-outline theme-primary">Candidater</button>
                 </div>
 
                 <!-- Message de confirmation, caché tant qu'on ne clique pas sur le btn graçe à display : none -->
-                <div id="messageConfirmation" class="alert alert-success" role="alert" style="display: none;">
+                <div id="messageConfirmation" class="alert theme-success" role="alert" style="display: none;">
                     Votre candidature a bien été prise en compte ! 
                 </div>
-
-            </div>
+                
+            </div>     
         </div>
+    
+        <div class="col-5 d-flex flex-column">
+            <div class="text-center mb-3">
+                <h5 class="mb-3">Localisation de l'entreprise</h5>
+            </div>
 
-        <!--  Script pour afficher le massage quand le btn est cliqué  -->
-        <script>
-            document.getElementById('boutonCandidater').addEventListener('click', function () {
-                //Affichage du message en changeant le style
-                document.getElementById('messageConfirmation').style.display = 'block';
-            });
-        </script>
+            <!-- Affichage carte -->
+            <div class="d-flex justify-content-center my-3">
+                <img src="images/carte.jpg" alt="Carte Test" width="300" height="200">
+            </div>
+
+        <!-- Bouton Consulter les logements -->
+            <button type="button" class="btn-solid theme-primary">Consulter les logements à proximité</button>
+
+
+            <!-- Nombre d'événements + btn En savoir plus   -->
+            <div class="card bg-light border-0" style="border-radius: 10px;">
+                <div class="card-body">
+                    <p class="mb-2">Nombre d'événements festifs aux alentours : <strong>XX</strong></p>
+                    <button type="button" class="btn-solid theme-primary">En savoir plus</button>
+                </div>
+            </div>
+
+        </div>
     </div>
 
 </div>
+
+    <!--  Script pour afficher le message quand le btn est cliqué  -->
+    <script>
+        document.getElementById('boutonCandidater').addEventListener('click', function () {
+            //Affichage du message en changeant le style
+            document.getElementById('messageConfirmation').style.display = 'block';
+        });
+    </script>
 
 
 {% endblock %}
