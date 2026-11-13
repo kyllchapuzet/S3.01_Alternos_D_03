@@ -35,7 +35,7 @@ $fonctionnalites = [
     ],
 ];
 
-echo $twig->render('aPropos.thml.twig', [
+echo $twig->render('aPropos.html.twig', [
     'equipe'          => $equipe,
     'fonctionnalites' => $fonctionnalites,
 ]);

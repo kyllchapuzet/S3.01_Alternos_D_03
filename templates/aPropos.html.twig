@@ -1,0 +1,129 @@
+{% extends "base_template.html.twig" %}
+
+{% block content %}
+  <div class="container my-4">
+
+    <!-- ===== BANDEAU DE PRÉSENTATION ===== -->
+    <section class="bg-primary bg-gradient text-white text-center rounded-4 shadow p-4 p-md-5 mb-5">
+      <div class="bg-white rounded-4 d-inline-block p-3 mb-4">
+        <img
+          src="images/logo_alternos.png"
+          alt="Logo Alternos : le lien pro qu'il te faut !"
+          class="img-fluid d-block mx-auto"
+          style="max-width: 400px;"
+        >
+      </div>
+      <h1 class="display-5 fw-bold">À propos d'Alternos</h1>
+      <p class="lead mx-auto mb-0" style="max-width: 700px;">
+        Une application web de mise en relation entre étudiants et entreprises
+        en recherche d'alternants ou de stagiaires.
+      </p>
+    </section>
+
+
+    <!-- ===== NOTRE IDÉE ===== -->
+    <section class="row align-items-center g-4 mb-5">
+      <div class="col-md-8">
+        <h3 class="fw-bold border-start border-primary border-4 ps-3 mb-3">Notre idée</h3>
+        <p>
+          Alternos agit comme un réseau social professionnel. Notre idée est simple :
+          créer un outil qui répond aux vrais besoins des utilisateurs.
+        </p>
+        <p class="mb-0">
+          Étudiants et recruteurs peuvent s'envoyer des offres et des CV, et discuter
+          en direct via une messagerie pour trouver une alternance ou un stage.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 bg-primary-subtle text-center p-4">
+          <div class="display-4">🎓 🤝 🏢</div>
+          <div class="fw-semibold text-primary-emphasis mt-2">
+            Étudiants et entreprises, enfin connectés
+          </div>
+      
+    </section>
+<!-- ===== FONCTIONNALITÉS  ===== -->
+  <section class="mb-5">
+    <h3 class="fw-bold border-start border-primary border-4 ps-3 mb-4">Nos fonctionnalités</h3>
+
+    <div class="row g-4">
+      {% for f in fonctionnalites %}
+        <div class="col-md-6 col-lg-4">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-4">
+              <h5 class="fw-bold text-primary mb-3">{{ f.titre }}</h5>
+              <p class="mb-0 text-muted">{{ f.texte }}</p>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="col-12">
+          <p class="text-muted">Aucune fonctionnalité à afficher pour le moment.</p>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+
+    <!-- ===== ÉQUIPE ===== -->
+    <section class="mb-5">
+      <h3 class="fw-bold border-start border-primary border-4 ps-3 mb-4">L'équipe</h3>
+
+      <div class="row g-4">
+        {% for membre in equipe %}
+
+          {# Couleur du badge selon le rôle #}
+          {% if membre.role == 'Scrum Master' %}
+            {% set couleur = 'text-bg-warning' %}
+          {% elseif membre.role == 'Product Owner' %}
+            {% set couleur = 'text-bg-success' %}
+          {% else %}
+            {% set couleur = 'text-bg-primary' %}
+          {% endif %}
+
+          {# Initiales : première lettre du prénom + première lettre du nom #}
+          {% set initiales = ((membre.nom|split(' ')|first|first) ~ (membre.nom|split(' ')|last|first))|upper %}
+
+          <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm h-100 text-center">
+              <div class="card-body p-4">
+                <div
+                  class="rounded-circle bg-primary bg-gradient text-white fw-bold fs-4
+                          d-flex align-items-center justify-content-center mx-auto mb-3"
+                  style="width: 72px; height: 72px;"
+                >
+                  {{ initiales }}
+                </div>
+                <h5 class="card-title fw-bold mb-2">{{ membre.nom }}</h5>
+                <span class="badge {{ couleur }} mb-3">{{ membre.role }}</span>
+                <div>
+                  {% for qualite in membre.qualites %}
+                    <span class="badge rounded-pill text-bg-light border m-1">{{ qualite }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- ===== LE PROJET ===== -->
+    <section>
+      <div class="card border-0 bg-body-tertiary rounded-4">
+        <div class="card-body p-4 p-md-5 text-center">
+          <h3 class="fw-bold mb-3">Le projet</h3>
+          <p class="mx-auto mb-2" style="max-width: 700px;">
+            Projet réalisé par le groupe <strong>D_03_Alternos</strong> (TD2 / TP4)
+            à l'IUT de Bayonne Pays Basque, dans le cadre de la ressource
+            R3.10 – Management des systèmes d'information (Agilité).
+          </p>
+          <span class="badge text-bg-primary rounded-pill px-3 py-2">
+            Enseignant tuteur : M. Carpentier Yann
+          </span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+{% endblock %}
