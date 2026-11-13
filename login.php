@@ -10,12 +10,12 @@ $pwd_valide = $GLOBALS['config']['default-user']['password'];
 if (isset($_POST['login']) && isset($_POST['pwd'])) {
     // on vérifie les informations saisies
     if ($login_valide == $_POST['login'] && $pwd_valide == $_POST['pwd']) {
-        session_start ();
-        // on enregistre les paramètres de notre visiteur comme variables de session ($login et $pwd) (
+        // on enregistre les paramètres de notre visiteur comme variables de session ($login et $pwd)
         $_SESSION['login'] = $_POST['login'];
         $_SESSION['pwd'] = $_POST['pwd'];
         // on redirige notre visiteur vers une page de notre section membre
-        header ('location: index.php');
+        header('Location: index.php');
+        exit;
     }
     else {
         echo '<body onLoad="alert(\'Membre non reconnu...\')">';

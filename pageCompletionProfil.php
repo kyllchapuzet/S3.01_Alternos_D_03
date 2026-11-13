@@ -6,12 +6,19 @@ $success = (isset($_GET['inscription']) && $_GET['inscription'] === 'reussie');
 $statut = $_SESSION['statut'] ?? null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $telephone = $_POST['telephone'];
-    $adresse = $_POST['adresse'];
-    $domaine = $_POST['domaine'];
-    $nbEmployes = $_POST['nbEmployes'];
+
+    if ($statut === 'etudiant') {
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $telephone = $_POST['telephone'];
+        $adresse = $_POST['adresse'];
+    }
+    elseif ($statut === 'entreprise') {
+        $nom = $_POST['nom'];
+        $domaine = $_POST['domaine'];
+        $nbEmployes = $_POST['nbEmployes'];
+    }
+
     
     $pdo = new PDO("mysql:host={$GLOBALS['config']['bd']['host']};dbname={$GLOBALS['config']['bd']['name']}", $GLOBALS['config']['bd']['user'], $GLOBALS['config']['bd']['password']);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
