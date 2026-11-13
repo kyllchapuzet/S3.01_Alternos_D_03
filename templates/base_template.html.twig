@@ -40,9 +40,21 @@
             </div>
           </dialog>
           <div class="d-flex align-items-center gap-3 ms-auto">
-            <a class="nav-link" href="pageProfil.php"><strong>Mon compte</strong></a>
-            
-            <a class="nav-link" href="pageConnexion.php"><strong>Se connecter</strong></a>
+            {% if session.login is defined %}
+              <div data-bs-theme="blue">
+                <button visually-hidden="true" class="btn btn-icon rounded-circle" type="button" data-bs-toggle="menu" data-bs-target="#menu-1" aria-controls="menu-1" aria-expanded="false" aria-label="Toggle menu">
+                  <span class="avatar theme-primary">
+                    {{ session.login|slice(0, 2)|upper }}
+                  </span>
+                </button>
+                <div class="menu">
+                  <a class="menu-item active" href="#">Mon compte</a>
+                  <a class="menu-item fg-danger" href="logout.php"><strong>Se déconnecter</strong></a>
+                </div>
+              </div>
+            {% else %}
+              <a class="nav-link" href="pageConnexion.php"><strong>Se connecter</strong></a>
+            {% endif %}
           </div>
         </div>
       </nav>
