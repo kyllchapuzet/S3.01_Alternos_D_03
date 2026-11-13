@@ -25,7 +25,7 @@ $erreur = null;
             $sql = $pdo->prepare("INSERT INTO Etudiant(email, password) VALUES (?, ?)");
             $sql->execute([$email, $passwordCrypte]);
 
-            header('Location: page_connexion.php?inscription=reussie');
+            header('Location: pageConnexion.php?inscription=reussie');
             exit();
         }
 
