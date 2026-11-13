@@ -1,0 +1,64 @@
+{% extends "base_template.html.twig" %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-header bg-primary bg-gradient text-white rounded-top-4 p-4">
+                    <h2 class="mb-0 fw-bold">Créer une nouvelle annonce</h2>
+                </div>
+                
+                <div class="card-body p-4 p-md-5">
+                    
+                    <form action="creation_annonce.php" method="POST">
+                        
+                        <!-- Titre -->
+                        <div class="mb-4">
+                            <label for="titre" class="form-label fw-bold">Titre de l'annonce <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="titre" name="titre" required placeholder="Ex: Développeur Web en Alternance">
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-4">
+                            <label for="description" class="form-label fw-bold">Description <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="description" name="description" rows="6" required placeholder="Décrivez les missions, le profil recherché, les technologies utilisées..."></textarea>
+                        </div>
+
+                        <div class="row mb-4">
+                            <!-- Salaire -->
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label for="salaire" class="form-label fw-bold">Salaire (mensuel en €)</label>
+                                <input type="number" step="0.01" min="0" class="form-control" id="salaire" name="salaire" placeholder="Ex: 1200.50">
+                            </div>
+
+                            <!-- Type de contrat -->
+                            <div class="col-md-6">
+                                <label for="typeDeContrat" class="form-label fw-bold">Type de contrat <span class="text-danger">*</span></label>
+                                <select class="form-select" id="typeDeContrat" name="typeDeContrat" required>
+                                    <option value="" selected disabled>Choisissez un type de contrat</option>
+                                    <option value="Alternance">Alternance</option>
+                                    <option value="Stage">Stage</option>
+                                    <option value="CDI">CDI</option>
+                                    <option value="CDD">CDD</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="index.php" class="btn btn-outline-secondary px-4">Annuler</a>
+                            <button type="submit" class="btn btn-primary px-4 fw-bold">Publier l'annonce</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
