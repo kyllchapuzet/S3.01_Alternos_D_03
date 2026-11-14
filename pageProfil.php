@@ -9,6 +9,10 @@ if (!isset($_SESSION['login'])) {
     exit;
 }
 
+if (isset($_GET['modif'])) {
+    $modif = $_GET['modif'];
+}
+
 $pdo = new PDO(
     "mysql:host={$GLOBALS['config']['bd']['host']};dbname={$GLOBALS['config']['bd']['name']}", 
     $GLOBALS['config']['bd']['user'], 
@@ -21,5 +25,6 @@ $user = $sql->fetch(PDO::FETCH_ASSOC);
 
 echo $twig->render('pageProfil.html.twig', [
     'user' => $user,
+    'modif' => $modif
 ]);
 ?>

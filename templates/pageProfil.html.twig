@@ -26,13 +26,12 @@
       <div class="card-body">
         <strong> Mon Compte <span class="badge theme-primary">Etudiant</span> </strong>
         <ul>
-          <li class=""><strong>Nom :</strong> {{ user.nom }} </li>
-          <li><strong>Prénom :</strong> {{ user.prenom }}</li>
-          <li><strong>Adresse mail :</strong> {{ user.email }} </li>
-          <li><strong>Numéro de téléphone :</strong> {{ user.numTel }} </li>
-          <li><strong>Adresse :</strong> {{ user.adresse }} </li>
+          <li class=""><strong>Nom :</strong> {% if modif %} {% if modif == 'nom' %} <input type="text" name="nom" id="nom" placeholder="{{ user.nom }} "> {% else %} {{ user.nom }} {% endif %} <a href="pageProfil.php?modif=nom" class="btn">✎</a> {% endif %} </li> 
+          <li><strong>Prénom :</strong> {% if modif %} {% if modif == 'prenom' %} <input type="text" name="prenom" id="prenom" placeholder="{{ user.prenom }} "> {% else %} {{ user.prenom }} {% endif %} <a href="pageProfil.php?modif=prenom" class="btn">✎</a>{% endif %}</li>
+          <li><strong>Adresse mail :</strong>{% if modif %} {% if modif == 'email' %} <input type="email" name="email" id="email" placeholder="{{ user.email }} "> {% else %} {{ user.email }}  {% endif %} <a href="pageProfil.php?modif=email" class="btn">✎</a>{% endif %}</li>
+          <li><strong>Numéro de téléphone :</strong> {% if modif %} {% if modif == 'tel' %} <input type="tel" name="numTel" id="numTel" placeholder="{{ user.numTel }} "> {% else %} {{ user.numTel }} {% endif %} <a href="pageProfil.php?modif=tel" class="btn">✎</a>{% endif %}</li>
+          <li><strong>Adresse :</strong> {% if modif %} {% if modif == 'adresse' %} <input type="text" name="adresse" id="adresse" placeholder="{{ user.adresse }} "> {% else %} {{ user.adresse }} {% endif %} <a href="pageProfil.php?modif=adresse" class="btn">✎</a> {% endif %}</li>
         </ul>
-        <a href="#" class="btn btn-primary">✎ Modifier mes informations</a>
       </div>
     </div>
   </div>
