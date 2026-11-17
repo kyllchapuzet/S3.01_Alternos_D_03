@@ -9,6 +9,12 @@
   </div>
 </div>
 
+{% if success == '1' %}
+  <div class="alert theme-success m-5" role="alert">
+    Modifications enregistrées avec succès.
+  </div>
+{% endif %}
+
 <ul class="nav nav-pills" id="pills-tab" role="tablist">
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="pills-compte-tab" data-bs-toggle="tab" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Mes Informations</button>
@@ -26,11 +32,70 @@
       <div class="card-body">
         <strong> Mon Compte <span class="badge theme-primary">Etudiant</span> </strong>
         <ul>
-          <li class=""><strong>Nom :</strong> {% if modif == 'nom' %} <input type="text" name="nom" id="nom" placeholder="{{ user.nom }} "> <a href="pageProfil.php?modif=confirmNom" class="btn">✓</a> {% else %} {{ user.nom }} <a href="pageProfil.php?modif=nom" class="btn">✎</a> {% endif %} </li> 
-          <li><strong>Prénom :</strong> {% if modif == 'prenom' %} <input type="text" name="prenom" id="prenom" placeholder="{{ user.prenom }} "> <a href="pageProfil.php?modif=confirmPrenom" class="btn">✓</a> {% else %} {{ user.prenom }} <a href="pageProfil.php?modif=prenom" class="btn">✎</a>{% endif %}</li>
-          <li><strong>Adresse mail :</strong> {% if modif == 'email' %} <input type="email" name="email" id="email" placeholder="{{ user.email }} "> <a href="pageProfil.php?modif=confirmEmail" class="btn">✓</a> {% else %} {{ user.email }}  <a href="pageProfil.php?modif=email" class="btn">✎</a>{% endif %}</li>
-          <li><strong>Numéro de téléphone :</strong> {% if modif == 'tel' %} <input type="tel" name="numTel" id="numTel" placeholder="{{ user.numTel }} "> <a href="pageProfil.php?modif=confirmNumTel" class="btn">✓</a> {% else %} {{ user.numTel }} <a href="pageProfil.php?modif=tel" class="btn">✎</a>{% endif %}</li>
-          <li><strong>Adresse :</strong> {% if modif == 'adresse' %} <input type="text" name="adresse" id="adresse" placeholder="{{ user.adresse }} "> <a href="pageProfil.php?modif=confirmAdresse" class="btn">✓</a> {% else %} {{ user.adresse }} <a href="pageProfil.php?modif=adresse" class="btn">✎</a> {% endif %}</li>
+          <li>
+            <strong>Nom :</strong>
+            {% if modif == 'nom' %}
+              <form method="post" action="pageProfil.php" style="display:inline;">
+                <input type="hidden" name="champ" value="nom">
+                <input type="text" name="valeur" value="{{ user.nom }}">
+                <button type="submit" class="btn">✓</button>
+              </form>
+            {% else %}
+              {{ user.nom }} <a href="pageProfil.php?modif=nom" class="btn">✎</a>
+            {% endif %}
+          </li>
+
+          <li>
+            <strong>Prénom :</strong>
+            {% if modif == 'prenom' %}
+              <form method="post" action="pageProfil.php" style="display:inline;">
+                <input type="hidden" name="champ" value="prenom">
+                <input type="text" name="valeur" value="{{ user.prenom }}">
+                <button type="submit" class="btn">✓</button>
+              </form>
+            {% else %}
+              {{ user.prenom }} <a href="pageProfil.php?modif=prenom" class="btn">✎</a>
+            {% endif %}
+          </li>
+
+          <li>
+            <strong>Adresse mail :</strong>
+            {% if modif == 'email' %}
+              <form method="post" action="pageProfil.php" style="display:inline;">
+                <input type="hidden" name="champ" value="email">
+                <input type="email" name="valeur" value="{{ user.email }}">
+                <button type="submit" class="btn">✓</button>
+              </form>
+            {% else %}
+              {{ user.email }} <a href="pageProfil.php?modif=email" class="btn">✎</a>
+            {% endif %}
+          </li>
+
+          <li>
+            <strong>Numéro de téléphone :</strong>
+            {% if modif == 'tel' %}
+              <form method="post" action="pageProfil.php" style="display:inline;">
+                <input type="hidden" name="champ" value="numTel">
+                <input type="tel" name="valeur" value="{{ user.numTel }}">
+                <button type="submit" class="btn">✓</button>
+              </form>
+            {% else %}
+              {{ user.numTel }} <a href="pageProfil.php?modif=tel" class="btn">✎</a>
+            {% endif %}
+          </li>
+
+          <li>
+            <strong>Adresse :</strong>
+            {% if modif == 'adresse' %}
+              <form method="post" action="pageProfil.php" style="display:inline;">
+                <input type="hidden" name="champ" value="adresse">
+                <input type="text" name="valeur" value="{{ user.adresse }}">
+                <button type="submit" class="btn">✓</button>
+              </form>
+            {% else %}
+              {{ user.adresse }} <a href="pageProfil.php?modif=adresse" class="btn">✎</a>
+            {% endif %}
+          </li>
         </ul>
       </div>
     </div>
