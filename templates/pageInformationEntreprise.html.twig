@@ -10,19 +10,19 @@
         <!-- Information de l'entreprise -->
         <div class="col-7">
             
-            <div class="card">
+            <div class="card shadow-lg">
                 <!-- Logo Entreprise -->
                 <div class="card-header">
-                    <img src="images/{{ entreprise.logo }}" alt="Logo" width="40" height="40">
+                    <img src="images/{{ entreprise.logo }}" alt="Banniere" class="w-100" style="height: 180px; object-fit: cover;">
                 </div>
 
                 <ul class="list-group list-group-flush border-0">
-                    <li class="list-group-item">Nom de l'entreprise: {{ entreprise.nom }}</li>
-                    <li class="list-group-item">Description de l'offre : {{ entreprise.offre }}</li>
+                    <li class="list-group-item"><strong>Nom de l'entreprise : </strong>{{ entreprise.nom }}</li>
+                    <li class="list-group-item"><strong>Description de l'offre : </strong><br>{{ entreprise.description }}</li>
 
                     <!--Si l'utilisateur souhaite contacter l'entreprise, il clique et est renvoyé sur la page de discussion directement avec l'entreprise -->
-                    <li class="list-group-item">Discuter avec l'entreprise :  
-                        <a href="discussion.php?destinataire={{ entreprise.mail }}">Ouvrir la messagerie</a>
+                    <li class="list-group-item"><strong>Discuter avec l'entreprise :</strong>  
+                        <a href="discussion.php?destinataire={{ entreprise.email }}">Ouvrir la messagerie</a>
                     </li>
                 </ul>
 
@@ -54,7 +54,7 @@
 
 
             <!-- Nombre d'événements + btn En savoir plus   -->
-            <div class="card bg-light" style="border-radius: 10px;">
+            <div class="card bg-light shadow" style="border-radius: 10px;">
                 <div class="card-body">
                     <p class="mb-2 text-center">Nombre d'événements festifs aux alentours : <strong>XX</strong></p>
                     <button type="button" class="btn-outline theme-primary mx-auto">En savoir plus</button>
