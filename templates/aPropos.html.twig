@@ -20,7 +20,6 @@
       </p>
     </section>
 
-
     <!-- ===== NOTRE IDÉE ===== -->
     <section class="row align-items-center g-4 mb-5">
       <div class="col-md-8">
@@ -40,32 +39,33 @@
           <div class="fw-semibold text-primary-emphasis mt-2">
             Étudiants et entreprises, enfin connectés
           </div>
-      
+        </div>
+      </div>
     </section>
-<!-- ===== FONCTIONNALITÉS  ===== -->
-  <section class="mb-5">
-    <h3 class="fw-bold border-start border-primary border-4 ps-3 mb-4">Nos fonctionnalités</h3>
 
-    <div class="row g-4">
-      {% for f in fonctionnalites %}
-        <div class="col-md-6 col-lg-4">
-          <div class="card border-0 shadow-sm h-100">
-            <div class="card-body p-4">
-              <h5 class="fw-bold text-primary mb-3">{{ f.titre }}</h5>
-              <p class="mb-0 text-muted">{{ f.texte }}</p>
+    <!-- ===== FONCTIONNALITÉS ===== -->
+    <section class="mb-5">
+      <h3 class="fw-bold border-start border-primary border-4 ps-3 mb-4">Nos fonctionnalités</h3>
+
+      <div class="row g-4">
+        {% for f in fonctionnalites %}
+          <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body p-4">
+                <h5 class="fw-bold text-primary mb-3">{{ f.titre }}</h5>
+                <p class="mb-0 text-muted">{{ f.texte }}</p>
+              </div>
             </div>
           </div>
-        </div>
-      {% else %}
-        <div class="col-12">
-          <p class="text-muted">Aucune fonctionnalité à afficher pour le moment.</p>
-        </div>
-      {% endfor %}
-    </div>
-  </section>
+        {% else %}
+          <div class="col-12">
+            <p class="text-muted">Aucune fonctionnalité à afficher pour le moment.</p>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
 
-
-    <!-- ===== ÉQUIPE ===== -->
+       <!-- ===== ÉQUIPE : 3 membres par ligne, donc 2 lignes ===== -->
     <section class="mb-5">
       <h3 class="fw-bold border-start border-primary border-4 ps-3 mb-4">L'équipe</h3>
 
@@ -74,31 +74,21 @@
 
           {# Couleur du badge selon le rôle #}
           {% if membre.role == 'Scrum Master' %}
-            {% set couleur = 'text-bg-warning' %}
+            {% set couleur = 'bg-warning text-dark' %}
           {% elseif membre.role == 'Product Owner' %}
-            {% set couleur = 'text-bg-success' %}
+            {% set couleur = 'bg-success text-white' %}
           {% else %}
-            {% set couleur = 'text-bg-primary' %}
+            {% set couleur = 'bg-primary text-white' %}
           {% endif %}
 
-          {# Initiales : première lettre du prénom + première lettre du nom #}
-          {% set initiales = ((membre.nom|split(' ')|first|first) ~ (membre.nom|split(' ')|last|first))|upper %}
-
-          <div class="col-md-6 col-lg-4">
+          <div class="col-4">
             <div class="card border-0 shadow-sm h-100 text-center">
-              <div class="card-body p-4">
-                <div
-                  class="rounded-circle bg-primary bg-gradient text-white fw-bold fs-4
-                          d-flex align-items-center justify-content-center mx-auto mb-3"
-                  style="width: 72px; height: 72px;"
-                >
-                  {{ initiales }}
-                </div>
+              <div class="card-body p-3">
                 <h5 class="card-title fw-bold mb-2">{{ membre.nom }}</h5>
-                <span class="badge {{ couleur }} mb-3">{{ membre.role }}</span>
+                <span class="badge d-inline-block {{ couleur }} mb-3">{{ membre.role }}</span>
                 <div>
                   {% for qualite in membre.qualites %}
-                    <span class="badge rounded-pill text-bg-light border m-1">{{ qualite }}</span>
+                    <span class="badge d-inline-block rounded-pill bg-light text-dark border m-1">{{ qualite }}</span>
                   {% endfor %}
                 </div>
               </div>
