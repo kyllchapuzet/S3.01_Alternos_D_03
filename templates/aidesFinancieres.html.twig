@@ -3,6 +3,7 @@
 {% block title %}Aides financières{% endblock %}
 
 {% block content %}
+    <!--Lien sous titre dans la bulle en dessous du header-->
     <div style="width: 100%; max-width: 980px; margin: 0 auto; padding-top: 8px;">
         <div style="display: flex; justify-content: center;">
             <div style="width: min(100%, 360px); border: 2px solid #1d1d1d; border-radius: 28px; background: #f3f3f3; padding: 18px 26px; text-align: center; font-size: 1.05rem; font-weight: 500; color: #111; box-sizing: border-box;">
@@ -10,4 +11,76 @@
             </div>
         </div>
     </div>
+
+    <!-- Création d'un container contenant un bloc avec un menu déroulant pour chaque type d'aide financière grâce à des modèles Bootstrap -->
+
+    <div class="container my-5"> 
+        <div class="row row-cols-1 row-cols-md-3 g-4"> 
+            {# Bloc 1 #}
+            <div class="col">
+                <div class="card h-100 border-dark rounded-4 shadow-sm d-flex flex-column"> 
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title fw-bold">Bourses</h4>
+                        <p class="card-text text-muted">Voici les différentes bourses auquel vous pourrez être éligible.</p>
+                        
+                        {# Contenu dépliable avec plusieurs aides#}
+                        <div class="collapse mt-auto" id="collapseBlock1"> 
+                            <hr class="text-muted">
+                            <p class="mb-0">Aide </p>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pb-3 pt-0">
+                        <button class="btn btn-outline-dark btn-sm rounded-pill w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBlock1" aria-expanded="false" aria-controls="collapseBlock1"> <!-- 🔗 Lien buttons : https://getbootstrap.com/docs/5.3/components/buttons/ -->
+                            Voir les détails
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {# Bloc 2 #}
+            <div class="col">
+                <div class="card h-100 border-dark rounded-4 shadow-sm d-flex flex-column"> 
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title fw-bold">Logements</h4>
+                        <p class="card-text text-muted">Voici les différentes aides au logement auxquelles vous pourrez être éligible.</p>
+                        
+                        {# Contenu dépliable avec plusieurs aides#}
+                        <div class="collapse mt-auto" id="collapseBlock2"> 
+                            <hr class="text-muted">
+                            <p class="mb-0">Aide </p>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pb-3 pt-0">
+                        <button class="btn btn-outline-dark btn-sm rounded-pill w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBlock2" aria-expanded="false" aria-controls="collapseBlock2"> <!-- 🔗 Lien buttons : https://getbootstrap.com/docs/5.3/components/buttons/ -->
+                            Voir les détails
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {# Bloc 3 #}
+            <div class="col">
+                <div class="card h-100 border-dark rounded-4 shadow-sm d-flex flex-column"> 
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title fw-bold">Stagiaires/Alternants</h4>
+                        <p class="card-text text-muted">Voici les différentes aides auxquelles vous pourrez être éligible en tant que stagiaire ou alternant.</p>
+                        
+                        {# Contenu dépliable avec plusieurs aides#}
+                        <div class="collapse mt-auto" id="collapseBlock3"> 
+                            <hr class="text-muted">
+                            <p class="mb-0">Aide</p>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pb-3 pt-0">
+                        <button class="btn btn-outline-dark btn-sm rounded-pill w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBlock3" aria-expanded="false" aria-controls="collapseBlock3"> <!-- 🔗 Lien buttons : https://getbootstrap.com/docs/5.3/components/buttons/ -->
+                            Voir les détails
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    
 {% endblock %}
