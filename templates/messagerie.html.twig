@@ -50,7 +50,7 @@
               {% else %}
                 <!-- destinataire -->
                 <div class="text-start mb-3">
-                  <small class="text-muted">{{ destinataire_nom }} • {{ msg.dateEnvoi|date('d/m/Y H:i') }}</small><br>
+                  <small class="text-muted">{{ destinataire_nom }}. {{ msg.dateEnvoi|date('d/m/Y H:i') }}</small><br>
                   <span class="d-inline-block p-2 rounded bg-white border">
                     {{ msg.Contenu }}
                   </span>

@@ -1,7 +1,7 @@
 <?php
 require_once 'include.php';
 
-$user_email = "ton_mail@exemple.fr";
+$user_email = "alalisse@caks";
 
 $pdo = new PDO(
     "mysql:host=" . $GLOBALS['config']['bd']['host'] . ";dbname=" . $GLOBALS['config']['bd']['name'] . ";charset=utf8mb4",
@@ -9,24 +9,58 @@ $pdo = new PDO(
     $GLOBALS['config']['bd']['password'],
 );
 
-//entreprise qui a envoyé ou reçu un message avec l'utilisateur
+// tous les messages envoyés ou reçus par l'utilisateur 
 $sql = $pdo->prepare("
-    SELECT e.email, e.nom
-    FROM Entreprise e
-    JOIN Message m
-      ON e.email = m.emailExpediteur OR e.email = m.emailDestinataire
-    WHERE (m.emailExpediteur = ? OR m.emailDestinataire = ?)
-      AND e.email != ?
-    GROUP BY e.email, e.nom
+    SELECT emailExpediteur, emailDestinataire
+    FROM Message
+    WHERE emailExpediteur = ? OR emailDestinataire = ?
+    ORDER BY dateEnvoi DESC
 ");
+$sql->execute([$user_email, $user_email]);
+$lignes = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-$sql->execute([$user_email, $user_email, $user_email]);
-$conversations = $sql->fetchAll(PDO::FETCH_ASSOC);
+// personnes  avec qui l'utilisateur a discuté
+$conversations = [];
+foreach ($lignes as $ligne) {
+
+    // l'autre personne de la conversation
+    if ($ligne['emailExpediteur'] === $user_email) {
+        $autre = $ligne['emailDestinataire']; // emmail message envoyé
+    } else {
+        $autre = $ligne['emailExpediteur']; //  emmail message recu
+    }
+
+    //verif c'est une entreprise
+    $req = $pdo->prepare("SELECT nom FROM Entreprise WHERE email = ?");
+    $req->execute([$autre]);
+    $entreprise = $req->fetchColumn();
+
+    //verif c'est un étudiant
+    $nomEtudiant = null;
+    if (!$entreprise) {
+        $req = $pdo->prepare("SELECT prenom, nom FROM Etudiant WHERE email = ?");
+        $req->execute([$autre]);
+        $etudiant = $req->fetch(PDO::FETCH_ASSOC);
+
+        if ($etudiant) {
+            $nomEtudiant = $etudiant['prenom'] . ' ' . $etudiant['nom'];
+        }
+    }
+
+    //Détermine le nom final à afficher
+    if ($entreprise) {
+        $nom = $entreprise;
+    } elseif ($nomEtudiant) {
+        $nom = $nomEtudiant;
+    } 
+
+    $conversations[$autre] = ['email' => $autre, 'nom' => $nom];
+}
 
 // Récupération de l'email choisi par l'utilisateur
-$email_choisi = $_GET['email'] ?? ($conversations[0]['email'] ?? null);
+$email_choisi = $_GET['email'] ?? null;
 
-// Récupération du nom de l'entreprise choisie
+// Récupération du nom de la personne choisie
 $destinataire_nom = null;
 foreach ($conversations as $conv) {
     if ($conv['email'] === $email_choisi) {
@@ -34,7 +68,7 @@ foreach ($conversations as $conv) {
     }
 }
 
-// Récupération des messages échangés avec l'entreprise choisie
+// Récupération des messages échangés avec la personne choisie
 $sql = $pdo->prepare("
     SELECT emailExpediteur, emailDestinataire, Contenu, dateEnvoi
     FROM Message
@@ -50,13 +84,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email_destinataire = $_POST['email_destinataire'] ?? null;
     $message            = trim($_POST['message'] ?? '');
 
-    $sql = $pdo->prepare("
-        INSERT INTO Message (emailExpediteur, emailDestinataire, Contenu)
-        VALUES (?, ?, ?)
-    ");
-    $sql->execute([$user_email, $email_destinataire, $message]);
+    if ($email_destinataire && $message !== '') {
+        $sql = $pdo->prepare("
+            INSERT INTO Message (emailExpediteur, emailDestinataire, Contenu)
+            VALUES (?, ?, ?)
+        ");
+        $sql->execute([$user_email, $email_destinataire, $message]);
+    }
 
-    header('Location: messagerie.php?email=' . $email_destinataire);
+    header('Location: messagerie.php?email=' . urlencode($email_destinataire ?? ''));
     exit;
 }
 
