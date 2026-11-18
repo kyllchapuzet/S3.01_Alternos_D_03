@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'include.php';
 
 $success = (isset($_GET['inscription']) && $_GET['inscription'] === 'reussie');

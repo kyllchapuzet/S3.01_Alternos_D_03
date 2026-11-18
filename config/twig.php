@@ -19,6 +19,7 @@ $twig->getExtension(\Twig\Extension\CoreExtension::class)->setTimezone('Europe/P
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 
 $twig->addGlobal('config', $GLOBALS['config']);
+$twig->addGlobal('session', $_SESSION);
 //Ajout de l'extension d'internationalisation qui permet d'utiliser les filtres de date
 //dans twig
 $twig->addExtension(new IntlExtension());
