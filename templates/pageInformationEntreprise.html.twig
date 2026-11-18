@@ -3,12 +3,14 @@
 {% block title %} Information de l'entreprise {% endblock %}
 
 {% block content %}
+<!-- Charge la feuille de style CSS de Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
 <div>
 
     <div class="row g-4 pt-10">
         
         <!-- Information de l'entreprise -->
-        <div class="col-7">
+        <div class="col-7"></div>
             
             <div class="card shadow-lg">
                 <!-- Logo Entreprise -->
@@ -44,11 +46,9 @@
                 <h5 class="mb-3">Localisation de l'entreprise</h5>
             </div>
 
-            <!-- Affichage carte -->
-            <div class="d-flex justify-content-center my-3">
-                <img src="images/carte.jpg" alt="Carte Test" width="300" height="200">
-            </div>
-
+            <!-- Affichage Carte OpenStreetMap -->
+            <div id="maCarte" class="my-3" style="height: 300px; width: 100%; border-radius: 8px;"></div>
+ 
         <!-- Bouton Consulter les logements -->
             <button type="button" class="btn-outline theme-primary mx-auto mt-3 mb-5">Consulter les logements à proximité</button>
 
@@ -66,12 +66,43 @@
 
 </div>
 
-    <!--  Script pour afficher le message quand le btn est cliqué  -->
+    <!-- Charge la bibliothèque JavaScript de Leaflet (le moteur qui gère l'affichage interactif, le zoom et les marqueurs) -->
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+
+    <!-- Script de la carte et du bouton Candidater -->
     <script>
-        document.getElementById('boutonCandidater').addEventListener('click', function () {
-            //Affichage du message en changeant le style
-            document.getElementById('messageConfirmation').style.display = 'block';
-        });
+        // Coordonnées d'initialisation (centre de la France)
+        var lat = 46.6033;
+        var lon = 1.8883;
+        var macarte = null;
+
+        // Fonction d'initialisation de la carte
+        function initMap() {
+            // Crée la carte dans la div "maCarte" et centre la vue sur [lat, lon] avec un zoom de 5
+            macarte = L.map('maCarte').setView([lat, lon], 5);
+
+            // Charge et affiche le fond de carte depuis OpenStreetMap France
+            L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                attribution: 'données © OpenStreetMap/ODbL - rendu OSM France',
+                minZoom: 1,
+                maxZoom: 20
+            }).addTo(macarte);
+
+            // Ajoute un marqueur sur la carte et affiche le nom de l'entreprise au clic
+            var marker = L.marker([lat, lon]).addTo(macarte);
+            marker.bindPopup("{{ entreprise.nom|e('js') }}");
+        }
+
+        // Exécution au chargement de la page
+        window.onload = function() {
+            initMap();
+
+            //Script pour afficher le message quand le btn est cliqué
+            document.getElementById('boutonCandidater').addEventListener('click', function () {
+                //Affichage du message en changeant le style
+                document.getElementById('messageConfirmation').style.display = 'block';
+            });
+        };
     </script>
 
 
