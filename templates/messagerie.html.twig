@@ -13,8 +13,8 @@
 
             {% for conv in conversations %}
               <a
-                href="messagerie.php?mail={{ conv.mail }}"
-                class="list-group-item list-group-item-action {{ conv.mail == mail_choisi ? 'active' : '' }}"
+                href="messagerie.php?email={{ conv.email }}"
+                class="list-group-item list-group-item-action {{ conv.email == email_choisi ? 'active' : '' }}"
               >
                 {{ conv.nom }}
               </a>
@@ -39,7 +39,7 @@
           <div class="card-body bg-light overflow-y-auto" style="height: 400px;" id="zone-messages">
             {% for msg in messages %}
               <!-- définir couleur des messages -->
-              {% if msg.mailExpediteur == user_mail %}
+              {% if msg.emailExpediteur == user_email %}
                 <!-- moi -->
                 <div class="text-end mb-3">
                   <small class="text-muted">Moi • {{ msg.dateEnvoi|date('d/m/Y H:i') }}</small><br>
@@ -65,7 +65,7 @@
           <!-- Formulaire d'envoi -->
           <div class="card-footer bg-white">
             <form method="POST" class="d-flex gap-2">
-              <input type="hidden" name="mail_destinataire" value="{{ mail_choisi }}">
+              <input type="hidden" name="email_destinataire" value="{{ email_choisi }}">
               <input type="text" name="message" class="form-control" placeholder="Écrivez votre message..." required>
               <button type="submit" class="btn btn-primary">Envoyer</button>
             </form>

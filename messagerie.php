@@ -1,7 +1,7 @@
 <?php
 require_once 'include.php';
 
-$user_mail = "ton_mail@exemple.fr";
+$user_email = "ton_mail@exemple.fr";
 
 $pdo = new PDO(
     "mysql:host=" . $GLOBALS['config']['bd']['host'] . ";dbname=" . $GLOBALS['config']['bd']['name'] . ";charset=utf8mb4",
@@ -11,64 +11,59 @@ $pdo = new PDO(
 
 //entreprise qui a envoyé ou reçu un message avec l'utilisateur
 $sql = $pdo->prepare("
-    SELECT e.mail, e.nom
+    SELECT e.email, e.nom
     FROM Entreprise e
     JOIN Message m
-      ON e.mail = m.mailExpediteur OR e.mail = m.mailDestinataire
-    WHERE (m.mailExpediteur = ? OR m.mailDestinataire = ?)
-      AND e.mail != ?
-    GROUP BY e.mail, e.nom
+      ON e.email = m.emailExpediteur OR e.email = m.emailDestinataire
+    WHERE (m.emailExpediteur = ? OR m.emailDestinataire = ?)
+      AND e.email != ?
+    GROUP BY e.email, e.nom
 ");
-$sql->execute([$user_mail, $user_mail, $user_mail]);
+
+$sql->execute([$user_email, $user_email, $user_email]);
 $conversations = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-// Récupération du mail choisi par l'utilisateur
-$mail_choisi = $_GET['mail'] ?? null;
+// Récupération de l'email choisi par l'utilisateur
+$email_choisi = $_GET['email'] ?? ($conversations[0]['email'] ?? null);
 
 // Récupération du nom de l'entreprise choisie
 $destinataire_nom = null;
 foreach ($conversations as $conv) {
-    if ($conv['mail'] === $mail_choisi) {
+    if ($conv['email'] === $email_choisi) {
         $destinataire_nom = $conv['nom'];
     }
 }
 
 // Récupération des messages échangés avec l'entreprise choisie
-
-
-    $sql = $pdo->prepare("
-        SELECT mailExpediteur, mailDestinataire, Contenu, dateEnvoi
-        FROM Message
-        WHERE (mailExpediteur = ? AND mailDestinataire = ?)
-           OR (mailExpediteur = ? AND mailDestinataire = ?)
-        ORDER BY dateEnvoi ASC
-    ");
-    $sql->execute([$user_mail, $mail_choisi, $mail_choisi, $user_mail]);
-    $messages = $sql->fetchAll(PDO::FETCH_ASSOC);
+$sql = $pdo->prepare("
+    SELECT emailExpediteur, emailDestinataire, Contenu, dateEnvoi
+    FROM Message
+    WHERE (emailExpediteur = ? AND emailDestinataire = ?)
+       OR (emailExpediteur = ? AND emailDestinataire = ?)
+    ORDER BY dateEnvoi ASC
+");
+$sql->execute([$user_email, $email_choisi, $email_choisi, $user_email]);
+$messages = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 // Envoi d'un message 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $mail_destinataire = $_POST['mail_destinataire'] ?? null;
-    $message           = trim($_POST['message'] ?? '');
+    $email_destinataire = $_POST['email_destinataire'] ?? null;
+    $message            = trim($_POST['message'] ?? '');
 
     $sql = $pdo->prepare("
-        INSERT INTO Message (mailExpediteur, mailDestinataire, Contenu)
+        INSERT INTO Message (emailExpediteur, emailDestinataire, Contenu)
         VALUES (?, ?, ?)
     ");
-    $sql->execute([$user_mail, $mail_destinataire, $message]);
+    $sql->execute([$user_email, $email_destinataire, $message]);
 
-    header('Location: messagerie.php?mail=' . $mail_destinataire );
+    header('Location: messagerie.php?email=' . $email_destinataire);
     exit;
 }
 
-
-
-
 echo $twig->render('messagerie.html.twig', [
     'conversations'    => $conversations,
-    'mail_choisi'      => $mail_choisi,
+    'email_choisi'     => $email_choisi,
     'destinataire_nom' => $destinataire_nom,
     'messages'         => $messages,
-    'user_mail'        => $user_mail,
+    'user_email'       => $user_email,
 ]);
