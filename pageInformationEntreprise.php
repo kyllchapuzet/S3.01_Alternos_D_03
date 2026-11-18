@@ -10,7 +10,13 @@ $pdo = new PDO('mysql:host=lakartxela.iutbayonne.univ-pau.fr;dbname=mhild001_bd;
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 //Récupéation des informations de l'entreprise à partir de la base de données
-$sql = $pdo->prepare("SELECT * FROM Entreprise WHERE email = ?");
+$sql = $pdo->prepare("
+    SELECT Entreprise.*, Adresse.Latitude, Adresse.Longitude 
+    FROM Entreprise 
+    INNER JOIN Annonce ON Entreprise.email = Annonce.emailEntreprise
+    INNER JOIN Adresse ON Annonce.idAdresse = Adresse.id
+    WHERE Entreprise.email = ?
+");
 $sql->execute([$mailEntreprise]);
 $entreprise = $sql->fetch(PDO::FETCH_ASSOC);
 

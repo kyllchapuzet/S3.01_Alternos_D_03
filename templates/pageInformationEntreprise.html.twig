@@ -10,7 +10,7 @@
     <div class="row g-4 pt-10">
         
         <!-- Information de l'entreprise -->
-        <div class="col-7"></div>
+        <div class="col-7">
             
             <div class="card shadow-lg">
                 <!-- Logo Entreprise -->
@@ -34,9 +34,10 @@
                 </div>
 
                 <!-- Message de confirmation, caché tant qu'on ne clique pas sur le btn graçe à display : none -->
-                <div id="messageConfirmation" class="alert theme-success" role="alert" style="display: none;">
-                    Votre candidature a bien été prise en compte ! 
-                </div>
+                    <div id="messageConfirmation" class="alert theme-success mx-auto mb-5" role="alert" style="display: none; width: fit-content;">
+                        Votre candidature a bien été prise en compte ! 
+                    </div>
+               
                 
             </div>     
         </div>
@@ -71,15 +72,16 @@
 
     <!-- Script de la carte et du bouton Candidater -->
     <script>
-        // Coordonnées d'initialisation (centre de la France)
-        var lat = 46.6033;
-        var lon = 1.8883;
+        // Récupération de la latitude et de la longitude de l'entreprise depuis la base de données
+        var lat = {{ entreprise.Latitude ?: 46.6033 }}; // on récupère la latitude de l'entreprise, sinon on met une valeur par défaut (centre de la France)
+        var lon = {{ entreprise.Longitude ?: 1.8883 }}; // on récupère la longitude de l'entreprise, sinon on met une valeur par défaut (centre de la France)
+        var zoom = {{ entreprise.Latitude ? 14 : 5 }}; // on définit le niveau de zoom en fonction de la présence de la latitude
         var macarte = null;
 
         // Fonction d'initialisation de la carte
         function initMap() {
             // Crée la carte dans la div "maCarte" et centre la vue sur [lat, lon] avec un zoom de 5
-            macarte = L.map('maCarte').setView([lat, lon], 5);
+            macarte = L.map('maCarte').setView([lat, lon], zoom);
 
             // Charge et affiche le fond de carte depuis OpenStreetMap France
             L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
