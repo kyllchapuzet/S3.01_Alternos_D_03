@@ -2,7 +2,6 @@
 require_once 'include.php';
 
 $email = $_POST['login'] ?? '';
-$erreur = null;
 
 
 
