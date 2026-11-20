@@ -1,6 +1,5 @@
 <?php
 
-
 if (isset($_GET['retour'])) {
     unset($_SESSION['statut']);
     header('Location: pageCreationDeCompte.php');

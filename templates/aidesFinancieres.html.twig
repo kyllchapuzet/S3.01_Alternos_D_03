@@ -1,0 +1,150 @@
+
+{% extends "base_template.html.twig" %}
+
+{% block title %}Aides financières{% endblock %}
+
+{% block content %}
+
+<!-- Description : Page contenant les différentes aides financières pour étudiants triées par catégories -->
+<!-- Auteur de la dernière modification : Hild Maxime -->
+<!-- Date de la dernière modification : 20/11/2026 -->
+
+    <!--Lien sous titre dans la bulle en dessous du header-->
+    <div style="width: 100%; max-width: 980px; margin: 0 auto; padding-top: 8px;">
+        <div style="display: flex; justify-content: center;">
+            <div style="width: min(100%, 360px); border: 2px solid #1d1d1d; border-radius: 28px; background: #f3f3f3; padding: 18px 26px; text-align: center; font-size: 1.05rem; font-weight: 500; color: #111; box-sizing: border-box;">
+                Mes aides financières
+            </div>
+        </div>
+    </div>
+
+    <!-- Création d'un container contenant un bloc avec un menu déroulant pour chaque type d'aide financière grâce à des modèles Bootstrap -->
+
+    <div class="container my-5"> 
+        <div class="row row-cols-1 row-cols-md-3 g-4"> 
+            {# Bloc 1 #}
+            <div class="col">
+                <div class="card h-100 border-dark rounded-4 shadow-sm d-flex flex-column"> 
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title fw-bold">Bourses</h4>
+                        <p class="card-text text-muted">Voici les différentes bourses auquel vous pourrez être éligible.</p>
+                        
+                        {# Contenu dépliable avec plusieurs aides#}
+                        <div class="collapse mt-auto" id="collapseBlock1"> 
+                            <hr class="text-muted">
+                            <ul class="list-unstyled mb-0 small">
+                                <li class="mb-3">
+                                    <strong>Bourse sur critères sociaux (CROUS) :</strong> 
+                                    Aide principale versée sur 10 mois selon les revenus et l'éloignement.
+                                    <br><a href="https://www.lescrous.fr/nos-services/une-offre-de-services-riche-et-de-qualite-pour-tous-les-etudiants/#bourses-et-aides-financieres" target="_blank" class="text-dark text-decoration-underline">Simuler mes droits (CROUS)</a>
+                                </li>
+                                <li class="mb-3">
+                                    <strong>Aide au mérite :</strong> 
+                                    Complément de 900 €/an pour les boursiers ayant obtenu la mention "Très Bien" au bac.
+                                    <br><a href="https://www.etudiant.gouv.fr/fr/aide-au-merite-1291" target="_blank" class="text-dark text-decoration-underline">En savoir plus</a>
+                                </li>
+                                <li class="mb-3">
+                                    <strong>Aide spécifique d'urgence (FNAU) :</strong> 
+                                    Secours ponctuel ou annuel pour faire face à une difficulté financière grave.
+                                    <br><a href="https://www.etudiant.gouv.fr/fr/aides-specifiques-1305" target="_blank" class="text-dark text-decoration-underline">Contacter le CROUS</a>
+                                </li>
+                                <li class="mb-3">
+                                    <strong>Aide à la mobilité Master :</strong> 
+                                    Aide de 1 000 € pour les étudiants boursiers changeant d'académie en entrant en Master.
+                                    <br><a href="https://www.etudiant.gouv.fr/fr/aide-la-mobilite-en-master-1504" target="_blank" class="text-dark text-decoration-underline">Consulter les conditions</a>
+                                </li>
+                        </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pb-3 pt-0">
+                        <button class="btn btn-outline-dark btn-sm rounded-pill w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBlock1" aria-expanded="false" aria-controls="collapseBlock1"> <!-- 🔗 Lien buttons : https://getbootstrap.com/docs/5.3/components/buttons/ -->
+                            Voir les détails
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {# Bloc 2 #}
+            <div class="col">
+                <div class="card h-100 border-dark rounded-4 shadow-sm d-flex flex-column"> 
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title fw-bold">Logements</h4>
+                        <p class="card-text text-muted">Voici les différentes aides au logement auxquelles vous pourrez être éligible.</p>
+                        
+                        {# Contenu dépliable avec plusieurs aides#}
+                        <div class="collapse mt-auto" id="collapseBlock2"> 
+                            <hr class="text-muted">
+                            <ul class="list-unstyled mb-0 small">
+                                <li class="mb-3">
+                                    <strong>APL / ALS (CAF) :</strong> 
+                                    Aide personnalisée au logement.
+                                    <br><a href="https://www.caf.fr" target="_blank" class="text-dark text-decoration-underline">Simuler l'APL sur la CAF</a>
+                                </li>
+                                <li class="mb-3">
+                                    <strong>Garantie Visale :</strong> 
+                                    Caution gratuite de l'État permettant aux locataires d'avoir un garant (18-30 ans).
+                                    <br><a href="https://www.visale.fr" target="_blank" class="text-dark text-decoration-underline">Obtenir mon visa Visale</a>
+                                </li>
+                                <li class="mb-3">
+                                    <strong>Avance Loca-Pass :</strong> 
+                                    Prêt à taux 0% pour avancer le dépôt de garantie auprès du bailleur (jusqu'à 1 200 €).
+                                    <br><a href="https://www.actionlogement.fr/l-avance-loca-pass" target="_blank" class="text-dark text-decoration-underline">Demander l'Avance Loca-Pass</a>
+                                </li>
+                                <li>
+                                    <strong>Aides régionales au logement :</strong> 
+                                    Dispositifs locaux proposés par les régions ou métropoles pour l'accès au premier logement.
+                                    <br><a href="https://www.etudiant.gouv.fr/fr/les-aides-des-collectivites-territoriales-1315" target="_blank" class="text-dark text-decoration-underline">Voir les aides locales</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pb-3 pt-0">
+                        <button class="btn btn-outline-dark btn-sm rounded-pill w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBlock2" aria-expanded="false" aria-controls="collapseBlock2"> <!-- 🔗 Lien buttons : https://getbootstrap.com/docs/5.3/components/buttons/ -->
+                            Voir les détails
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {# Bloc 3 #}
+            <div class="col">
+                <div class="card h-100 border-dark rounded-4 shadow-sm d-flex flex-column"> 
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title fw-bold">Stagiaires/Alternants</h4>
+                        <p class="card-text text-muted">Voici les différentes aides auxquelles vous pourrez être éligible en tant que stagiaire ou alternant.</p>
+                        
+                        {# Contenu dépliable avec plusieurs aides#}
+                        <div class="collapse mt-auto" id="collapseBlock3"> 
+                            <hr class="text-muted">
+                            <ul class="list-unstyled mb-0 small">
+                                <li class="mb-3">
+                                    <strong>Aide Mobili-Jeune (Action Logement) :</strong> 
+                                    Subvention de 10 € à 100 €/mois sur le loyer, accessible aux alternants de -30 ans.
+                                    <br><a href="https://mobilijeune.actionlogement.fr" target="_blank" class="text-dark text-decoration-underline">Tester mon éligibilité</a>
+                                </li>
+                                <li class="mb-3">
+                                    <strong>Aide au permis de conduire (Apprentis) :</strong> 
+                                    Aide forfaitaire de 500 € pour financer le permis B.
+                                    <br><a href="https://www.service-public.fr/particuliers/vosdroits/F34195" target="_blank" class="text-dark text-decoration-underline">En savoir plus (Service-Public)</a>
+                                </li>
+                                <li class="mb-3">
+                                    <strong>Prime d'activité (CAF) :</strong> 
+                                    Complément de revenus mensuel versé aux alternants selon le salaire net perçu.
+                                    <br><a href="https://www.caf.fr" target="_blank" class="text-dark text-decoration-underline">Simuler la prime d'activité</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pb-3 pt-0">
+                        <button class="btn btn-outline-dark btn-sm rounded-pill w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBlock3" aria-expanded="false" aria-controls="collapseBlock3"> <!-- 🔗 Lien buttons : https://getbootstrap.com/docs/5.3/components/buttons/ -->
+                            Voir les détails
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    
+{% endblock %}
