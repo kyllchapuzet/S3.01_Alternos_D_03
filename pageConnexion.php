@@ -8,6 +8,8 @@ if (isset($_GET['retour'])) {
 }
 
 $successMessage = null;
+$erreur = null;
+
 
 $statut = $_POST['statut'] ?? $_SESSION['statut'] ?? null;
 if ($statut !== null) {
@@ -20,10 +22,7 @@ if ( isset($_GET['inscription']) && $_GET['inscription'] === 'reussie') {
 
 echo $twig->render('pageConnexion.html.twig', [
     'successMessage' => $successMessage,
-    'statut' => $statut
+    'statut' => $statut,
+    'erreur' => $erreur
 ]);
-
-
-
-
 ?>

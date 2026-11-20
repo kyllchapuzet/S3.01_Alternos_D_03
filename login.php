@@ -2,7 +2,6 @@
 require_once 'include.php';
 
 $email = $_POST['login'] ?? '';
-$erreur = null;
 
 
 
@@ -28,6 +27,7 @@ if (!$user) {
     if ($mdpCrypte == $passwordCrypte) {
         $_SESSION['login'] = $email;
         header('Location: index.php');
+
 
     } else {
         $erreur = "Mot de passe incorrect";
