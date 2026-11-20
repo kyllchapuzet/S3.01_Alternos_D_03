@@ -17,7 +17,7 @@ $sql = $pdo->prepare("
     ORDER BY dateEnvoi DESC
 ");
 $sql->execute([$user_email, $user_email]);
-$lignes = $sql->fetchAll(PDO::FETCH_ASSOC);
+$lignes = $sql->fetchAll(PDO::FETCH_ASSOC); // cree tableau associatif
 
 // personnes  avec qui l'utilisateur a discuté
 $conversations = [];
@@ -33,7 +33,7 @@ foreach ($lignes as $ligne) {
     //verif c'est une entreprise
     $req = $pdo->prepare("SELECT nom FROM Entreprise WHERE email = ?");
     $req->execute([$autre]);
-    $entreprise = $req->fetchColumn();
+    $entreprise = $req->fetch(PDO::FETCH_ASSOC);
 
     //verif c'est un étudiant
     $nomEtudiant = null;
@@ -49,10 +49,12 @@ foreach ($lignes as $ligne) {
 
     //Détermine le nom final à afficher
     if ($entreprise) {
-        $nom = $entreprise;
+        $nom = $entreprise['nom'];
     } elseif ($nomEtudiant) {
         $nom = $nomEtudiant;
-    } 
+    } else {
+        $nom = $autre; // ni entreprise ni étudiant : on affiche l'adresse
+    }
 
     $conversations[$autre] = ['email' => $autre, 'nom' => $nom];
 }
