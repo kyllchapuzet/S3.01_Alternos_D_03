@@ -75,3 +75,22 @@
   </div>
 </div>
 {% endblock %}
+
+
+<script>
+
+  const zone = document.getElementById('zone-messages');
+  if (zone) {
+    zone.scrollTop = zone.scrollHeight;
+  }
+
+
+  setInterval(function () {
+    const champ = document.querySelector('input[name="message"]');
+
+    // on ne recharge que si l'utilisateur n'est pas en train d'écrire un message
+    if (!champ || champ.value === '') {
+      location.reload();
+    }
+  }, 5000);// recharge la page toute les 5000 millisecondes
+</script>
