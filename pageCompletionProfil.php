@@ -1,8 +1,4 @@
 <?php
-<<<<<<< HEAD
-session_start();
-=======
->>>>>>> f7a915528b33229e4e791d7aae2bcad90bef6ba3
 require_once 'include.php';
 
 $success = (isset($_GET['inscription']) && $_GET['inscription'] === 'reussie');
