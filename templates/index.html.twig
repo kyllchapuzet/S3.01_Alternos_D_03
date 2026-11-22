@@ -2,27 +2,54 @@
 
 {% block title %} Page d'accueil {% endblock %}
 {% block content %}
-<br>
 
-<div class="text-center fs-5xl"> 
-    <strong> Trouve ton stage ou ton alternance, 
-        <span class="fg-primary"> 
-            simplement.
-        </span>
-    </strong>
-</div>
+    <br>
+    <div class="text-center fs-5xl"> 
+        <strong> Trouve ton stage ou ton alternance, 
+            <span class="fg-primary"> 
+                simplement.
+            </span>
+        </strong>
+    </div>
 
-<p class="text-center mx-auto mb-4 fg-secondary">
-    Alternos met en relation les étudiants et les entreprises.<br>
-    Explore les entreprises, repère celles qui te correspondent et échange directement avec elles.
-</p>
+    <p class="text-center mx-auto mb-4 fg-secondary">
+        Alternos met en relation les étudiants et les entreprises.
+        Explore les entreprises, repère celles qui te correspondent et échange directement avec elles.
+    </p>
 
-<img src="images/illustrationRecherche.png" class="img-fluid d-block mx-auto" width="600" alt="Illustration : des étudiants à la recherche d'un stage ou d'une alternance">
+    <img src="images/illustrationRecherche.png" class="img-fluid d-block mx-auto" width="600" alt="Illustration : des étudiants à la recherche d'un stage ou d'une alternance">
 
-<div class="text-center mb-5">
-    <a href="pageRechercheEntreprise.php" class="btn-subtle theme-primary px-12">Je cherche une entreprise</a>
-</div>
+    <div class="text-center mb-12">
+        <a href="pageRechercheEntreprise.php" class="btn-outline theme-primary px-12">Je cherche une entreprise</a>
+    </div>
 
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <section class="text-center mb-5">
+        <img
+            src="images/clementSDF.png"
+            class="img-fluid"
+            width="300"
+            alt="Étudiant montrant son portefeuille vide"
+        >
+
+        <div class="card rounded-4 mt-4">
+            <div class="card-body p-4 p-md-5">
+                <h2 class="h3 fw-bold">Manque d'argent ?</h2>
+                <p class="text-body-secondary mb-4 fg-secondary">
+                    64 % des étudiants ne se sentent pas bien informés sur la précarité étudiante,
+                    seulement 36 % des étudiants se jugent bien informés sur les aides financières
+                    auxquelles ils peuvent prétendre.
+                </p>
+                <div>
+                    <a href="aidesFinancieres.php" class="btn-outline theme-primary px-12">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+    </section>
     
 {% endblock %}
 
