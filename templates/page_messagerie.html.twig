@@ -1,0 +1,82 @@
+{% extends "base_template.html.twig" %}
+
+{% block content %}
+<div class="container my-4">
+  <div class="row g-3">
+
+    <!-- historique des conversations  -->
+    <aside class="col-3">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Discussions</h5>
+        </div>
+        <div class="list-group list-group-flush overflow-y-auto" style="max-height: 400px;">
+
+          <!-- une ligne par personne avec qui on a discuté -->
+          {% for conv in conversations %}
+            <a href="messagerie.php?email={{ conv.email|url_encode }}"
+               class="list-group-item list-group-item-action {{ conv.email == email_choisi ? 'active' : '' }}">
+              <div class="fw-bold">{{ conv.nom }}</div>
+            </a>
+          {% else %}
+            <div class="list-group-item text-muted">Aucune discussion.</div>
+          {% endfor %}
+
+        </div>
+      </div>
+    </aside>
+
+    <!-- partie message  -->
+    <main class="col-9">
+      <div class="card shadow-sm h-100">
+
+        <!-- Nom de la personne -->
+        <div class="card-header bg-white">
+          <h5 class="mb-0">Discussion avec <strong>{{ destinataire_nom }}</strong></h5>
+        </div>
+
+        <!-- Corps des messages -->
+        <div class="card-body bg-light overflow-y-auto" style="height: 400px;" id="zone-messages">
+
+          {% for msg in messages %}
+
+            {% if msg.emailExpediteur == user_email %}
+              <!-- Message Envoyé -->
+              <div class="mb-3 text-end">
+                <div class="small text-muted mb-1">Moi • {{ msg.dateEnvoi|date('d/m/Y H:i') }}</div>
+                <div class="p-3 bg-primary text-white rounded d-inline-block text-start" style="max-width: 80%;">
+                  {{ msg.Contenu }}
+                </div>
+              </div>
+            {% else %}
+              <!-- Message Reçu -->
+              <div class="mb-3 text-start">
+                <div class="small text-muted mb-1">{{ destinataire_nom }} • {{ msg.dateEnvoi|date('d/m/Y H:i') }}</div>
+                <div class="p-3 bg-white border rounded d-inline-block text-dark" style="max-width: 80%;">
+                  {{ msg.Contenu }}
+                </div>
+              </div>
+            {% endif %}
+
+          {% else %}
+            <p class="text-muted">Aucun message.</p>
+          {% endfor %}
+
+        </div>
+
+        <!-- envoie du message -->
+        <div class="card-footer bg-white">
+          <form method="POST" class="d-flex gap-2">
+            <input type="hidden" name="email_destinataire" value="{{ email_choisi }}">
+            <input type="text" name="message" class="form-control" placeholder="Écrivez votre message..." required>
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+          </form>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+</div>
+
+{% endblock %}
