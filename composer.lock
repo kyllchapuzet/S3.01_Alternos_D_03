@@ -472,7 +472,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-25T05:50:11+00:00"
+            "time": "2026-09-25T05:50:11+00:00",
+            "published-time": "2026-09-25T13:20:18+00:00"
         },
         {
             "name": "twig/twig",
@@ -552,7 +553,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-25T13:20:01+00:00"
+            "time": "2026-09-25T13:20:01+00:00",
+            "published-time": "2026-09-25T13:20:14+00:00"
         }
     ],
     "packages-dev": [],
@@ -563,5 +565,5 @@
     "prefer-lowest": false,
     "platform": {},
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.11.0"
 }
