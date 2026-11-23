@@ -59,12 +59,9 @@
 
        <!-- Formulaire d'envoi -->
         <div class="card-footer bg-white">
-          <form action="send_message.php" method="POST" enctype="multipart/form-data" class="d-flex gap-2">
-            <input type="file" name="piece_jointe" id="file-upload" class="d-none">
-            <label for="file-upload" class="btn btn-outline-secondary d-flex align-items-center m-0" title="Ajouter une pièce jointe" style="cursor: pointer;">
-              📎
-            </label>
-            <input type="text" name="message" class="form-control" placeholder="Écrivez votre message..." required>
+          <form method="POST" class="d-flex gap-2">
+            <input type="hidden" name="email_destinataire" value="{{ email_choisi }}">
+            <input type="text" name="message" class="form-control" placeholder="Écrivez votre message..." autocomplete="off" required>
             <button type="submit" class="btn btn-primary">Envoyer</button>
           </form>
         </div>
@@ -74,7 +71,7 @@
 
   </div>
 </div>
-{% endblock %}
+
 
 
 <script>
@@ -94,3 +91,4 @@
     }
   }, 5000);// recharge la page toute les 5000 millisecondes
 </script>
+{% endblock %}
